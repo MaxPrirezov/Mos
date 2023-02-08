@@ -1,0 +1,430 @@
+$easeOutBack: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$color-range-output: #f6054f;
+$color-input-placeholder: #c3c4c6;
+$height-range-bounds: 22px;
+$background-color-range-thumb: #f6054f;
+$radius-range-thumb: 100px;
+$height-range-thumb: 23px;
+$width-range-thumb: 23px;
+$size-range-thumb-shadow: 25px;
+$color-range-thumb-shadow: #f6054d70;
+$shadow-offset-y-range-thumb: 4px;
+$shadow-offset-x-range-thumb: 0px;
+$border-width-range-thumb: 6px;
+$border-color-range-thumb: #f6054f;
+$width-range-track: 100%;
+$height-range-track: 1px;
+$radius-range-track: 100px;
+$fill-range-track: #f6054f;
+$fill-range-track-active: #f6054f;
+
+//Output
+$height-range-output: 26px;
+$min-width-range-output: 53px;
+$padding-x-range-output: 20px;
+$size-range-output-arrow: 5px;
+$offset-y-range-output: 4px;
+
+.range {
+  @mixin range-track() {
+    box-sizing: border-box;
+    width: $width-range-track;
+    height: $height-range-track;
+    background: $fill-range-track;
+    border-radius: $radius-range-track;
+  }
+  @mixin range-thumb() {
+    box-sizing: border-box;
+    box-shadow: $shadow-offset-x-range-thumb $shadow-offset-y-range-thumb
+      $size-range-thumb-shadow $color-range-thumb-shadow;
+    border: $border-width-range-thumb solid $border-color-range-thumb;
+    height: $height-range-thumb;
+    width: $width-range-thumb;
+    border-radius: $radius-range-thumb;
+    background: $background-color-range-thumb;
+    cursor: pointer;
+  }
+
+  position: relative;
+
+  //Native
+  input[type="range"] {
+    appearance: none;
+    padding: 0;
+    width: $width-range-track;
+    height: $height-range-bounds;
+    cursor: pointer;
+    display: block;
+
+    &:focus {
+      outline: none;
+    }
+    &[disabled] {
+      opacity: 0.3;
+      cursor: default;
+    }
+  }
+
+  //Plugin wrapper
+  .rangeslider {
+    position: relative;
+    height: $height-range-bounds;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  //Track
+  .rangeslider:before {
+    @include range-track();
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  input::-webkit-slider-runnable-track {
+    @include range-track();
+    margin: $height-range-bounds / 2 0;
+  }
+  input::-moz-range-track {
+    @include range-track();
+    margin: $height-range-bounds / 2 0;
+  }
+  input::-ms-track {
+    @include range-track();
+    color: transparent;
+    padding: $height-range-bounds / 2 0;
+    background: transparent;
+    border-color: transparent;
+  }
+
+  //Track fill
+  input::-ms-fill-lower,
+  input::-ms-fill-upper {
+    @include range-track();
+  }
+  input::-ms-fill-lower {
+    background: $fill-range-track-active;
+  }
+  .rangeslider-fill-lower {
+    background-color: $fill-range-track-active;
+    border-radius: $radius-range-track;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: $height-range-track;
+    will-change: width;
+  }
+
+  //Thumb
+  input::-webkit-slider-thumb {
+    @include range-thumb();
+    appearance: none;
+    transform: translateY(-50%);
+    margin-top: $height-range-track / 2;
+  }
+  input::-moz-range-thumb {
+    @include range-thumb();
+  }
+  input::-ms-thumb {
+    @include range-thumb();
+  }
+  .rangeslider-thumb {
+    @include range-thumb();
+    position: absolute;
+    touch-action: pan-x;
+    top: 50%;
+    transform: translateY(-50%);
+    will-change: left;
+  }
+
+  .range-output {
+    position: absolute;
+    left: ($width-range-thumb - $border-width-range-thumb * 2) / 2;
+    top: ($width-range-thumb - $border-width-range-thumb * 2) / 2;
+    transform-origin: 0 0;
+    transition: transform 0.4s $easeOutBack;
+    user-select: none;
+
+    .output {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      position: absolute;
+      height: $height-range-output;
+      min-width: $min-width-range-output;
+      top: -($width-range-thumb / 2) - $offset-y-range-output - $size-range-output-arrow;
+      transform: translate(-50%, -100%);
+      background: $color-range-output;
+      font-family: "Bebas Neue";
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 110.5%;
+      border-radius: 5px;
+      white-space: nowrap;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-align: center;
+
+      &:before {
+        content: "";
+        position: absolute;
+        bottom: -$size-range-output-arrow + 2px; //Subtract 2 to get slight overlap that renders more nicely
+        left: 50%;
+        border: $size-range-output-arrow solid $color-range-output;
+        border-bottom: none;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #0f1016;
+}
+.price {
+  color: #fff;
+  height: 100vh;
+  &__container {
+    display: flex;
+    background: #171a21;
+    padding: 50px 70px;
+    max-width: 1282px;
+    margin: 60px auto;
+    border-radius: 40px;
+    height: calc(100vh - 120px);
+  }
+  &__form {
+    flex: 0 0 50%;
+    padding-right: 50px;
+    overflow: auto;
+    position: relative;
+    &::-webkit-scrollbar {  
+      width: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #f6054f;
+      width: 3px;
+      border-radius: 3px;
+    }
+  }
+  &__item {
+    margin-bottom: 85px;
+  }
+  &__item-title {
+    font-family: "Bebas Neue";
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 110.5%;
+    margin-bottom: 30px;
+  }
+  &__item-content {
+    padding: 30px 25px;
+    background: #222632;
+    border: 2px solid #262a39;
+    border-radius: 10px;
+  }
+  &__item-btns {
+    display: flex;
+  }
+  &__radio {
+    display: none;
+    &:checked ~ .label-for-radiobtn {
+      background: #f6054f;
+    }
+  }
+  &__range-content {
+    padding-top: 60px;
+  }
+  &__item-checkboxs {
+  }
+  &__checkbox-item {
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #263d63;
+    .price__radio:checked ~ label {
+      &:before {
+        right: 8px;
+      }
+      &:after {
+        background: #f6054f;
+      }
+    }
+    label {
+      display: block;
+      position: relative;
+      &:after,
+      &:before {
+        content: "";
+        position: absolute;
+        border-radius: 17px;
+        top: 50%;
+        transform: translate(0, -50%);
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+      }
+      &:after {
+        width: 70px;
+        height: 34px;
+        background: #6e777a;
+        right: 0;
+      }
+      &:before {
+        width: 23px;
+        height: 23px;
+        background: #ffffff;
+        right: 38px;
+        z-index: 1;
+      }
+    }
+    &:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+  }
+  &__right {
+    position: relative;
+    padding-left: 50px;
+    &:after {
+      content: '';
+      height: 100%;
+      position: absolute;
+      background: #f6054f;
+      width: 1px;
+      top: 0;
+      left: -2px;
+    }
+  }
+  &__person {
+    display: flex;
+    align-items: center;
+  }
+  &__person-img {
+    position: relative;
+    img {
+      width: 126px;
+      height: 126px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    &:after {
+      content: " ";
+      border-radius: 50%;
+      position: absolute;
+      bottom: 7px;
+      right: 7px;
+      background: #00B050;
+      border: 2px solid #FFFFFF;
+      width: 22px;
+      height: 22px;
+    }
+  }
+  &__person-info {
+    margin-left: 35px;
+  }
+  &__person-name {
+    font-family: 'Bebas Neue';
+    font-weight: 400;
+    font-size: 28px;
+  }
+  &__person-post {
+    font-size: 20px;
+    color: #263D63;
+  }
+  &__message {
+  }
+  &__params {
+  }
+  &__params-title {
+  }
+  &__params-items {
+  }
+  &__param {
+  }
+  &__totals {
+  }
+  &__total {
+  }
+  &__btns {
+  }
+  &__btn {
+  }
+}
+.rangeDays {
+  position: relative;
+  margin: 0 46px;
+  width: calc(100% - 92px);
+  .rangeslider-fill-lower,
+  .rangeslider:before {
+    display: none;
+  }
+  .rangeslider-thumb {
+    background: #fff;
+  }
+  .output {
+    width: 73px;
+  }
+  &__steps {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 14px);
+    left: 7px;
+    top: 4px;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: calc(100% + 88px);
+      height: 1px;
+      left: -44px;
+      background: #f6054f;
+    }
+    span {
+      display: block;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #f6054f;
+    }
+  }
+}
+.label-for-radiobtn {
+  background: #222632;
+  border: 2px solid #272c3c;
+  border-radius: 10px;
+  padding: 15px 20px;
+  display: block;
+  width: 215px;
+  font-family: "Bebas Neue";
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  margin-right: 20px;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.range {
+}
+.range-output {
+}
+.output {
+}
+.outputSlides {
+}
+.outputDays {
+}
+.dd {
+}
+.dropdown {
+}
+.btn-active {
+}
