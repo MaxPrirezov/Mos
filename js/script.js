@@ -132,35 +132,38 @@ const updateDays = (value) => {
   if (value > 7) {
     document
       .querySelector(".rangeDays")
-      .parentElement.classList.add("range-green");
+      .parentElement.parentElement.classList.add("range-green");
     document
       .querySelector(".rangeDays")
-      .parentElement.classList.remove("range-yellow");
+      .parentElement.parentElement.classList.remove("range-yellow");
     document
       .querySelector(".rangeDays")
-      .parentElement.classList.remove("range-red");
+      .parentElement.parentElement.classList.remove("range-red");
+    document.querySelector(".price__mark").textContent = "Стандартный срок";
   }
   if (value > 3 && value <= 7) {
     document
       .querySelector(".rangeDays")
-      .parentElement.classList.remove("range-green");
+      .parentElement.parentElement.classList.remove("range-green");
     document
       .querySelector(".rangeDays")
-      .parentElement.classList.add("range-yellow");
+      .parentElement.parentElement.classList.add("range-yellow");
     document
       .querySelector(".rangeDays")
-      .parentElement.classList.remove("range-red");
+      .parentElement.parentElement.classList.remove("range-red");
+    document.querySelector(".price__mark").textContent = "Срочно";
   }
   if (value <= 3) {
     document
       .querySelector(".rangeDays")
-      .parentElement.classList.remove("range-green");
+      .parentElement.parentElement.classList.remove("range-green");
     document
       .querySelector(".rangeDays")
-      .parentElement.classList.remove("range-yellow");
+      .parentElement.parentElement.classList.remove("range-yellow");
     document
       .querySelector(".rangeDays")
-      .parentElement.classList.add("range-red");
+      .parentElement.parentElement.classList.add("range-red");
+    document.querySelector(".price__mark").textContent = "Очень Срочно";
   }
   setTimeout(function () {
     document.querySelector(".price__param-days").remove();
@@ -280,6 +283,7 @@ document.querySelector("#translate").addEventListener("change", (e) => {
     }px`;
     langActive = [];
     counterLang = 0;
+    data.langs = 0;
     culc();
     e.target.parentElement.classList.remove("active");
     document.querySelector(".dropdown_list").innerHTML = "";

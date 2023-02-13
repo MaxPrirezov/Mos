@@ -468,6 +468,12 @@ body {
       margin-bottom: 0;
     }
   }
+  &__mark {
+    font-size: 20px;
+    padding: 9px 18px 5px;
+    border-radius: 10px;
+    margin-left: 20px;
+  }
 }
 .plan-mark {
   font-size: 16px;
@@ -532,6 +538,9 @@ body {
   background: linear-gradient(90deg, #be25fb 0%, #fe0051 100%);
 }
 .range-green {
+  .price__mark {
+    background: #00b050;
+  }
   .range .range-output .output {
     background: #00b050;
   }
@@ -555,6 +564,9 @@ body {
   }
 }
 .range-yellow {
+  .price__mark {
+    background: #ffc000;
+  }
   .range .range-output .output {
     background: #ffc000;
   }
@@ -578,6 +590,9 @@ body {
   }
 }
 .range-red {
+  .price__mark {
+    background: #f6054d;
+  }
   .range .range-output .output {
     background: #f6054d;
   }
