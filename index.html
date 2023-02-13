@@ -19,7 +19,9 @@
                     </h3>
                     <div class="price__item-btns">
                         <div class="price__item-btn">
-                            <input type="radio" id="newPreza" name="type" class="price__radio" checked />
+                            <input type="radio" id="newPreza" name="type" class="price__radio" />
+                            <span style="display: none">Новая <br>
+                                презентация</span>
                             <label class="label-for-radiobtn" for="newPreza">
                                 Новая <br>
                                 презентация
@@ -27,6 +29,8 @@
                         </div>
                         <div class="price__item-btn">
                             <input type="radio" id="oldPreza" name="type" class="price__radio" />
+                            <span style="display: none">Доработка <br>
+                                старой презентации</span>
                             <label class="label-for-radiobtn" for="oldPreza">
                                 Доработка <br>
                                 старой презентации
@@ -40,11 +44,11 @@
                     </h3>
                     <div class="price__item-content price__range-content">
                         <div class="range">
-                            <input name="rangeSlides" type="range" min="3" max="50"
-                                oninput="document.querySelector('.outputSlides').textContent = this.value">
+                            <input name="rangeSlides" type="range" min="8" max="50"
+                                oninput="updateSlides(this.value); document.querySelector('.outputSlides').textContent = this.value" value="12">
                             <div class="range-output">
                                 <output class="output outputSlides" name="output" for="rangeSlides">
-                                    25
+                                    12
                                 </output>
                             </div>
                         </div>
@@ -58,6 +62,7 @@
                         <div class="price__checkbox-item">
                             <input type="radio" id="conentToBe" name="content" value="conentToBe"
                                 class="price__radio" />
+                            <span></span>
                             <label for="conentToBe">
                                 Весь текст презентации <br>
                                 разбитый по слайдам<br>
@@ -66,6 +71,7 @@
                         </div>
                         <div class="price__checkbox-item">
                             <input type="radio" id="noContent" name="content" value="noContent" class="price__radio" />
+                            <span style="display: none">Текст и структура</span>
                             <label for="noContent">
                                 Нужно составить структуру, <br>
                                 написать «продающий» текст <br>
@@ -80,8 +86,8 @@
                     </h3>
                     <div class="price__item-content price__item-checkboxs">
                         <div class="price__checkbox-item">
-                            <input type="radio" id="photoToBe" name="photo" value="photoToBe" class="price__radio"
-                                checked />
+                            <input type="radio" id="photoToBe" name="photo" value="photoToBe" class="price__radio" />
+                            <span></span>
                             <label for="photoToBe">
                                 Все изображения и фото <br>
                                 преоставляет Заказчик
@@ -89,6 +95,8 @@
                         </div>
                         <div class="price__checkbox-item">
                             <input type="radio" id="noPhoto" name="photo" value="noPhoto" class="price__radio" />
+                            <span style="display: none">лицензионные <br>
+                                изображения</span>
                             <label for="noPhoto">
                                 Подобрать и выкупить <br>
                                 качественные лицензионные <br>
@@ -96,7 +104,8 @@
                             </label>
                         </div>
                         <div class="price__checkbox-item">
-                            <input type="radio" id="profPhoto" name="photo" value="profPhoto" class="price__radio" />
+                            <input type="checkbox" id="profPhoto" name="photoProf" value="profPhoto" class="price__radio" />
+                            <span style="display: none">фотосъемка</span>
                             <label for="profPhoto">
                                 Нужна профессиональная <br>
                                 предметная/портретная <br>
@@ -113,7 +122,8 @@
                     <div class="price__item-content price__item-checkboxs">
                         <div class="price__checkbox-item">
                             <input type="radio" id="designBrandbook" name="design" value="designBrandbook"
-                                class="price__radio" checked />
+                                class="price__radio" />
+                            <span style="display: none">Дизайн по бренд-буку</span>
                             <label for="designBrandbook">
                                 Дизайн по бренд-буку или <br>
                                 корпоративному шаблону <br>
@@ -122,6 +132,8 @@
                         </div>
                         <div class="price__checkbox-item">
                             <input type="radio" id="perDesign" name="design" value="perDesign" class="price__radio" />
+                            <span style="display: none">эксклюзивный <br>
+                                дизайн</span>
                             <label for="perDesign">
                                 Разработка эксклюзивного <br>
                                 дизайна по индивидуальному <br>
@@ -131,6 +143,8 @@
                         <div class="price__checkbox-item">
                             <input type="checkbox" id="infoDesign" name="infoDesign" value="infoDesign"
                                 class="price__radio" />
+                            <span style="display: none">инфографика или <br>
+                                иллюстрации</span>
                             <label for="infoDesign">
                                 Разработка дизайна со <br>
                                 сложной инфографикой или <br>
@@ -146,6 +160,7 @@
                     <div class="price__item-content price__item-checkboxs">
                         <div class="price__checkbox-item">
                             <input type="checkbox" id="anime" name="anime" value="anime" class="price__radio" />
+                            <span style="display: none">Анимация</span>
                             <label for="anime">
                                 Анимировать <br>
                                 презентацию
@@ -153,6 +168,7 @@
                         </div>
                         <div class="price__checkbox-item">
                             <input type="checkbox" id="animeInfo" name="anime" value="animeInfo" class="price__radio" />
+                            <span style="display: none">Видеоинфографика</span>
                             <label for="animeInfo">
                                 Создать сложную <br>
                                 видеоинфографику
@@ -165,7 +181,7 @@
                         07.
                         Срок разработки
                     </h3>
-                    <div class="price__item-content price__range-content">
+                    <div class="price__item-content price__range-content range-green">
                         <div class="range rangeDays">
                             <div class="rangeDays__steps">
                                 <span></span>
@@ -177,37 +193,30 @@
                                 <span></span>
                                 <span></span>
                             </div>
-                            <input name="rangeDays" type="range" min="3" max="10"
-                                oninput="document.querySelector('.outputDays').textContent = (this.value == 3 || this.value == 4) ? this.value + ' дня' : this.value + ' дней'">
+                            <input name="rangeDays" id="rangeDays" type="range" min="3" max="10"
+                                oninput="updateDays(this.value); document.querySelector('.outputDays').textContent = (this.value == 3 || this.value == 4) ? this.value + ' дня' : this.value + ' дней';" value="10">
                             <div class="range-output">
                                 <output class="output outputDays" name="output" for="rangeDays">
-                                    7 дней
+                                    10 дней
                                 </output>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="price__item">
+                <div class="price__item price__lang">
                     <h3 class="price__item-title">
                         08. перевод на другие языки
                     </h3>
                     <div class="price__item-content price__item-checkboxs">
                         <div class="price__checkbox-item">
-                            <input type="checkbox" id="designBrandbook" name="design" value="designBrandbook"
+                            <input type="checkbox" id="translate" name="design" value="translate"
                                 class="price__radio" />
-                            <label for="designBrandbook">
+                            <span style="display: none"></span>
+                            <label for="translate">
                                 Да/нет
                             </label>
                         </div>
-                        <div class="dd"><span>Выберите язык:</span>
-                            <ul class="dropdown">
-                                <li>
-                                    <a href="#">RU</a>
-                                </li>
-                                <li>
-                                    <a href="#">EN</a>
-                                </li>
-                            </ul>
+                        <div class="dropdown_list">
                         </div>
                     </div>
                 </div>
@@ -233,27 +242,15 @@
                     заполнить бриф, изучение которого даст
                 </div>
                 <div class="price__params">
-                    <h3 class="price__params-title">
+                    <h3 class="price__params-title price__item-title">
                         Выбранные параметры
                     </h3>
                     <div class="price__params-items">
-                        <div class="price__param">
+                        <div class="price__param price__param-days">
+                            10 дней
+                        </div>
+                        <div class="price__param price__param-slides">
                             12 слайдов
-                        </div>
-                        <div class="price__param">
-                            разработка текста
-                        </div>
-                        <div class="price__param">
-                            уникальный дизайн
-                        </div>
-                        <div class="price__param">
-                            анимация
-                        </div>
-                        <div class="price__param">
-                            Перевод <span>eng</span>
-                        </div>
-                        <div class="price__param">
-                            3 дня
                         </div>
                     </div>
                 </div>
@@ -261,8 +258,12 @@
                     <div class="price__total">
                         <span id="price__total">120 000</span>рублей
                     </div>
+                    <div class="price__border"></div>
                     <div class="price__total">
-                        <span id="price__installment">120 000</span>рублей
+                        <div class="plan-mark">
+                            Рассрочка на 10 мес
+                        </div>
+                        <span id="price__installment">120 000</span>руб/мес
                     </div>
                 </div>
                 <div class="price__btns">

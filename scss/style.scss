@@ -129,6 +129,7 @@ $offset-y-range-output: 4px;
     @include range-thumb();
   }
   .rangeslider-thumb {
+    transition: border 0.3s ease-in-out;
     @include range-thumb();
     position: absolute;
     touch-action: pan-x;
@@ -165,8 +166,10 @@ $offset-y-range-output: 4px;
       font-weight: bold;
       font-size: 1.2em;
       text-align: center;
+      transition: 0.3s ease-in-out;
 
       &:before {
+        transition: 0.3s ease-in-out;
         content: "";
         position: absolute;
         bottom: -$size-range-output-arrow + 2px; //Subtract 2 to get slight overlap that renders more nicely
@@ -187,6 +190,7 @@ $offset-y-range-output: 4px;
 }
 body {
   background: #0f1016;
+  font-family: Gilroy;
 }
 .price {
   color: #fff;
@@ -195,17 +199,17 @@ body {
     display: flex;
     background: #171a21;
     padding: 50px 70px;
-    max-width: 1282px;
+    max-width: 1320px;
     margin: 60px auto;
     border-radius: 40px;
-    height: calc(100vh - 120px);
+    position: relative;
   }
   &__form {
-    flex: 0 0 50%;
+    flex: 0 0 45%;
     padding-right: 50px;
     overflow: auto;
     position: relative;
-    &::-webkit-scrollbar {  
+    &::-webkit-scrollbar {
       width: 3px;
     }
     &::-webkit-scrollbar-thumb {
@@ -289,23 +293,53 @@ body {
       padding-bottom: 0;
       margin-bottom: 0;
     }
+    &.active {
+      margin-bottom: 40px !important;
+    }
+  }
+  &__input {
+    margin-top: 15px;
+    background: #0f1016;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    border-radius: 15px;
+    color: #fff;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
   }
   &__right {
     position: relative;
-    padding-left: 50px;
+    padding-left: 70px;
+    padding-right: 20px;
+    height: fit-content;
     &:after {
-      content: '';
-      height: 100%;
+      content: "";
       position: absolute;
       background: #f6054f;
+      display: block;
       width: 1px;
+      height: 100%;
       top: 0;
       left: -2px;
+    }
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #f6054f;
+      width: 3px;
+      border-radius: 3px;
     }
   }
   &__person {
     display: flex;
     align-items: center;
+    margin: 0 0 30px -13px;
   }
   &__person-img {
     position: relative;
@@ -321,8 +355,8 @@ body {
       position: absolute;
       bottom: 7px;
       right: 7px;
-      background: #00B050;
-      border: 2px solid #FFFFFF;
+      background: #00b050;
+      border: 2px solid #ffffff;
       width: 22px;
       height: 22px;
     }
@@ -331,32 +365,127 @@ body {
     margin-left: 35px;
   }
   &__person-name {
-    font-family: 'Bebas Neue';
+    font-family: "Bebas Neue";
     font-weight: 400;
     font-size: 28px;
   }
   &__person-post {
     font-size: 20px;
-    color: #263D63;
+    color: #263d63;
   }
   &__message {
+    padding: 17px 30px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 406px;
+    background: #252a37;
+    position: relative;
+    font-size: 16px;
+    color: #6e777a;
+    margin-bottom: 35px;
+    &::after {
+      content: "";
+      border: 10px solid #252a37;
+      border-top: none;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      position: absolute;
+      top: -10px;
+      left: 40px;
+    }
   }
   &__params {
+    border-top: 1px solid #263d63;
+    border-bottom: 1px solid #263d63;
+    padding: 35px 0;
   }
   &__params-title {
   }
   &__params-items {
+    display: flex;
+    flex-wrap: wrap;
   }
   &__param {
+    padding: 17px;
+    border: 2px solid #20242e;
+    border-radius: 5px;
+    margin: 0 10px 10px 0;
+    font-family: "Bebas Neue";
+    font-weight: 400;
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      color: #f6054f;
+      margin-left: 10px;
+    }
+  }
+  &__border {
+    width: 2px;
+    height: 61px;
+    background: #f6054f;
   }
   &__totals {
+    margin-top: 77px;
+    display: flex;
+    justify-content: space-between;
   }
   &__total {
+    font-family: "Bebas Neue";
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 65px;
+    position: relative;
+    span {
+      font-size: 65px;
+    }
   }
   &__btns {
+    display: flex;
+    flex-wrap: wrap;
   }
   &__btn {
+    margin-top: 50px;
+    padding: 20px 43px 17px;
+    border: 1px solid #f6054f;
+    margin-right: 25px;
+    border-radius: 10px;
+    font-family: "Bebas Neue";
+    font-weight: 400;
+    font-size: 32px;
+    &:last-child {
+      margin-right: 0;
+    }
   }
+  &__flag {
+    margin-left: 10px;
+  }
+  &__lang {
+    .price__checkbox-item {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+.plan-mark {
+  font-size: 16px;
+  line-height: 110.5%;
+  color: #ffffff;
+  position: absolute;
+  background: #00b050;
+  border: 2px solid #ffffff;
+  border-radius: 43px;
+  padding: 7px 30px;
+  top: -47px;
+  left: -5px;
+}
+.btn-addlang {
+  margin-top: 20px;
+  color: rgb(138, 152, 170);
+  cursor: pointer;
+  width: fit-content;
 }
 .rangeDays {
   position: relative;
@@ -373,6 +502,7 @@ body {
     width: 73px;
   }
   &__steps {
+    transition: 0.3s ease-in-out;
     position: absolute;
     display: flex;
     justify-content: space-between;
@@ -386,16 +516,91 @@ body {
       width: calc(100% + 88px);
       height: 1px;
       left: -44px;
-      background: #f6054f;
+      transition: 0.3s ease-in-out;
     }
     span {
+      transition: 0.3s ease-in-out;
       display: block;
       width: 13px;
       height: 13px;
       border-radius: 50%;
-      background: #f6054f;
     }
   }
+}
+.btn-active {
+  border: none;
+  background: linear-gradient(90deg, #be25fb 0%, #fe0051 100%);
+}
+.range-green {
+  .range .range-output .output {
+    background: #00b050;
+  }
+  .range .range-output .output:before {
+    border: 5px solid #00b050;
+    border-bottom: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+  }
+  .range .rangeslider-thumb {
+    background: #fff;
+    border: 6px solid #00b050;
+  }
+  .rangeDays__steps {
+    &:after {
+      background: #00b050;
+    }
+    span {
+      background: #00b050;
+    }
+  }
+}
+.range-yellow {
+  .range .range-output .output {
+    background: #ffc000;
+  }
+  .range .range-output .output:before {
+    border: 5px solid #ffc000;
+    border-bottom: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+  }
+  .range .rangeslider-thumb {
+    background: #fff;
+    border: 6px solid #ffc000;
+  }
+  .rangeDays__steps {
+    &:after {
+      background: #ffc000;
+    }
+    span {
+      background: #ffc000;
+    }
+  }
+}
+.range-red {
+  .range .range-output .output {
+    background: #f6054d;
+  }
+  .range .range-output .output:before {
+    border: 5px solid #f6054d;
+    border-bottom: none;
+    border-left-color: transparent;
+    border-right-color: transparent;
+  }
+  .range .rangeslider-thumb {
+    background: #fff;
+    border: 6px solid #f6054d;
+  }
+  .rangeDays__steps {
+    &:after {
+      background: #f6054d;
+    }
+    span {
+      background: #f6054d;
+    }
+  }
+}
+.dropdown_list {
 }
 .label-for-radiobtn {
   background: #222632;
@@ -412,19 +617,46 @@ body {
   transition: 0.3s ease-in-out;
   cursor: pointer;
 }
-.range {
+.dropdown_button {
+  border: 1px solid #f6054f;
+  background: none;
+  border-radius: 10px;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 200px;
+  margin-bottom: 10px;
+  display: flex;
+  user-select: none;
 }
-.range-output {
+
+.courses {
+  display: none;
+  position: absolute;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
-.output {
+
+.courses li {
+  padding: 16px;
+  text-decoration: none;
+  display: flex;
+  list-style: none;
+  border: 1px solid #f6054f;
+  background: #222632;
+  margin-bottom: -1px;
+  user-select: none;
 }
-.outputSlides {
+
+.courses li a {
+  text-decoration: none;
+  color: white;
+  display: block;
+  padding: 10px;
 }
-.outputDays {
-}
-.dd {
-}
-.dropdown {
-}
-.btn-active {
+
+.courses li:hover {
+  background: linear-gradient(90deg, #be25fb 0%, #fe0051 100%);
 }
